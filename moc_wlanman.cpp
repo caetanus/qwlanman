@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'wlanman.h'
 **
-** Created: Sun Jan 9 12:47:11 2011
+** Created: Sun Jan 9 16:53:11 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_WlanMan[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,12 +32,14 @@ static const uint qt_meta_data_WlanMan[] = {
 
  // slots: signature, parameters, type, tag, flags
        9,    8,    8,    8, 0x0a,
+      35,   24,    8,    8, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_WlanMan[] = {
-    "WlanMan\0\0UpdateStatus()\0"
+    "WlanMan\0\0UpdateStatus()\0exitstatus\0"
+    "getEssidContinue(int)\0"
 };
 
 const QMetaObject WlanMan::staticMetaObject = {
@@ -70,9 +72,10 @@ int WlanMan::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: UpdateStatus(); break;
+        case 1: getEssidContinue((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

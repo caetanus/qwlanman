@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 
+
 WlanMan::WlanMan(QWidget *parent)
     : QSystemTrayIcon(parent)
 {
@@ -14,8 +15,12 @@ WlanMan::WlanMan(QWidget *parent)
     icons[15]= QIcon(":/images/wifi15.png");
     icons[0] = QIcon(":/images/wifi0.png");
     icon = -1;
+    iw = new QProcess(this);
     UpdateStatus();
     setVisible(true);
+    essid = "";
+    getEssid();
+    qDebug() << essid;
     timeout.setInterval(2000);
     timeout.setSingleShot(false);
     timeout.connect(&timeout,SIGNAL(timeout()),this,SLOT(UpdateStatus()));
@@ -25,6 +30,29 @@ WlanMan::WlanMan(QWidget *parent)
 
 
 }
+void WlanMan::getEssid(){
+
+    iw->start("iwconfig");
+    connect(iw,SIGNAL(finished(int)),this,SLOT(getEssidContinue(int)));
+}
+
+void WlanMan::getEssidContinue(int status){
+
+
+
+
+    QString s = QString(iw->readAllStandardOutput());
+    int match,start;
+
+    start = s.indexOf("ESSID:") +7 ;
+
+
+    for(match=start;s[match] != '"'; match++);
+    essid = s.mid(start,match-start);
+
+
+}
+
 int WlanMan::getIconQuality(int quality){
     int ret;
     if (quality > 70) ret = 100;
@@ -63,7 +91,9 @@ void WlanMan::UpdateStatus(){
 
     QString();
 
-    this->setToolTip(QString::number(quality) + "%");
+    this->setToolTip((QStringList() << "ESSID: " <<
+                     essid << tr("\nQuality") <<
+                     QString::number(quality) + "%").join(" "));
     printf("quality: %d, icon %d\n",quality,getIconQuality(quality));
     if ((micon = getIconQuality(quality)) != icon)
         this->setIcon(icons[micon]);
