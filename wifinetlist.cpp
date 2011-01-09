@@ -1,16 +1,16 @@
 #include "wifinetlist.h"
-#include <Qt>
+#include <QtGui>
 
 WifiNetList::WifiNetList(QObject *parent) :
     QObject(parent)
 {
 }
-WifiNetList::list(QMap<QString,Cell> netlist)
+void WifiNetList::list(QMap<QString,Cell> netlist)
 {
     QString out, line, essid, protocol,cell;
     int quality;
     int match, init;
-    QBool encryption, wpa=false, state = false;
+    bool encryption, wpa=false, state = false;
     QProcess a;
     a.execute("iwlist scanning");
     a.readAllStandardError();
@@ -46,7 +46,7 @@ WifiNetList::list(QMap<QString,Cell> netlist)
             essid = line.mid(init,match-init);
             continue;
         }
-        else if (line.contains())
+        //else if (line.contains())
 
     }
     out = (QString)a.readAll();

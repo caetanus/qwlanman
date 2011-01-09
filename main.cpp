@@ -6,9 +6,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    //WlanMan w;
-    //w.show();
-    WifiNetList();
+    WlanMan w;
+    w.show();
+    //WifiNetList();
 
     return a.exec();
 }

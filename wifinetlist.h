@@ -9,7 +9,7 @@
 class WifiNetList : public QObject
 {
     Q_OBJECT
-    friend class Cell;
+
 
 
 public:
